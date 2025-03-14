@@ -20,6 +20,10 @@
 - No order placement
 
 ## Video while running tests:
+- https://www.loom.com/share/663fa4b5e0fb44898e83f44abadf8041
+
+## Test Video Walkthrough  
+[Watch the video walkthrough](https://www.loom.com/share/663fa4b5e0fb44898e83f44abadf8041)
 
 
 ## Complete Flow:
