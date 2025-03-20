@@ -1,8 +1,6 @@
 package ui.page_objects;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
 import static ui.ui_utils.Shared.clickOnElement;
 import static ui.ui_utils.Shared.sendTextToElement;
 

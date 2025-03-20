@@ -2,7 +2,6 @@ package ui.page_objects;
 
 import org.openqa.selenium.*;
 import java.util.List;
-
 import static ui.ui_utils.Shared.*;
 
 public class VideoGamesPage {
@@ -12,7 +11,6 @@ public class VideoGamesPage {
     private final By sortByPriceLocator = By.id("s-result-sort-select");
     private final By priceLocator = By.xpath("//span[@class='a-price-whole']");
     private final By nextPageButtonLocator = By.linkText("Next");
-    private final By cartCountLocator = By.id("nav-cart-count");
 
     //prevent instance
     private VideoGamesPage() {
@@ -46,7 +44,7 @@ public class VideoGamesPage {
                 .anyMatch(price -> price < 15000);
     }
 
-    public void addProductToCart() {
+    public void navigateToNextPage() {
         boolean itemsLess15k = false;
         while (!itemsLess15k) {
             List<WebElement> productsPrices = getAllElements(priceLocator);
@@ -54,35 +52,7 @@ public class VideoGamesPage {
 
             if (!itemsLess15k) {
                 clickOnElement(nextPageButtonLocator);
-            } else {
-                for (WebElement priceElement : productsPrices) {
-                    try {
-                        double price = Double.parseDouble(priceElement.getText()
-                                .replace(",", "")
-                                .trim());
-
-                        if (price < 15000) {
-                            // First find the containing card
-                            WebElement productContainer = priceElement.findElement(
-                                    By.xpath("./ancestor::div[contains(@class, 'puis-card-container')]")
-                            );
-
-                            // Then find the add to cart button within this container
-                            WebElement addToCartButton = productContainer.findElement(
-                                    By.xpath(".//span[contains(@class, 'a-button-inner')]//button[contains(@class, 'a-button-text')]")
-                            );
-                            addToCartButton.click();
-                        }
-                    } catch (Exception e) {
-                        continue;
-                    }
-                }
             }
         }
-    }
-
-    public int getCartCount(){
-        System.out.println(getElementText(cartCountLocator));
-        return Integer.parseInt(getElementText(cartCountLocator));
     }
 }

@@ -10,9 +10,11 @@ public class ShippingData {
         final String filePath = "src/test/resources/ui-test-data/amazon-shipping-data.json";
         jsonData = readJsonFile(filePath);
     }
+
     public static ShippingData getShippingData(){
         return new ShippingData();
     }
+
     public String getPhoneNumber(){
         return jsonData.getString("phoneNumber");
     }

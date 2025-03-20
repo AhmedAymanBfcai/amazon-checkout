@@ -33,48 +33,48 @@ public final class Shared {
         }
     }
 
-    public static double TestClickOnElement() {
+    public static double addAffordableProductsToCart() throws InterruptedException {
+
+        Thread.sleep(2000);
+
         List<WebElement> products = driver.findElements(By.xpath("//div[@data-component-type='s-search-result']"));
 
-        System.out.println("products");
-        System.out.println(products);
+        double total = 0;
+        System.out.println("Number of Products in this page: " + products.size());
 
-        double total = 0.0; // To store total price before adding to cart
-        int notFoundCount = 0; // Counter for missing Add to Cart buttons
+        int successfulAdditions = 0;
 
-        for (WebElement product : products)
+        for (WebElement product: products)
             {
                 try {
                     // Get the price element
                     WebElement priceElement = product.findElement(By.xpath(".//span[@class='a-price-whole']"));
 
-                    String priceText = priceElement.getText().replace(",", "").trim(); // Remove commas
-                    System.out.println("Price Text: " + priceText);
+                    String productPrice = priceElement.getText().replace(",", "").trim(); // Remove commas
+                    System.out.println("Product Price: " + productPrice);
 
                     // Convert to double
-                    double price = Double.parseDouble(priceText);
+                    double price = Double.parseDouble(productPrice);
 
-                    // Check if price is < 15,000 EGP
                     if (price < 15000) {
                         // Click "Add to Cart"
-                        try {
+                            Thread.sleep(1000);
                             WebElement addToCartButton = product.findElement(By.name("submit.addToCart"));
                             addToCartButton.click();
-                            total += price; // Add to total
                             System.out.println("Added product with price: " + price + " EGP");
-                        } catch (NoSuchElementException e) {
-                            notFoundCount++; // Increment count if button is missing
-                            System.out.println("Add to Cart button NOT found for a product.");
-                        }
-                    }
+                            total += price;
+                            System.out.println("Total price now is: " + total + " EGP");
+                            successfulAdditions++;
+                        } else {
+                        System.out.println("Price is getter than 15k " + price + " EGP");
+                       }
                 } catch (Exception e) {
-                    System.out.println("Could not get price or add to cart for a product.");
+                    System.out.println("Could not get price or add-to-cart-button for this product");
                 }
-                System.out.println("Total products where 'Add to Cart' button was NOT found: " + notFoundCount);
-
             }
 
-        return total ;
+        System.out.println("Number of successfulAdditions " + successfulAdditions);
+        return total;
     }
 
     public static void sendTextToElement(By elementPath, String text) {

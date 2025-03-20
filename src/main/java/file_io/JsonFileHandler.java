@@ -1,6 +1,6 @@
 package file_io;
 
-import org.json.JSONObject;
+import org.json.JSONObject; // For parsing JSON content into a JSONObject.
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,9 +15,11 @@ import java.util.logging.Logger;
 public class JsonFileHandler {
     private static final Logger LOGGER = Logger.getLogger(JsonFileHandler.class.getName());
 
+    // Read key-value pairs from a .properties file into a Properties object.
+    // Takes a file path as a string and returns a Properties object.
     public static Properties readFromPropertiesFile(String domainFilePath) {
 
-        LOGGER.info("Attempting to properties file from path: " + domainFilePath);
+        LOGGER.info("Attempting to read properties file from path: " + domainFilePath);
         Properties properties = new Properties();
 
         if (domainFilePath == null || domainFilePath.isEmpty()) {
@@ -40,6 +42,7 @@ public class JsonFileHandler {
         return properties;
     }
 
+    // Read a JSON file into a JSONObject (from the org.json library). It uses Java’s NIO package for file handling.
     public static JSONObject readJsonFile(String jsonFilePath) {
         LOGGER.info("Attempting to read JSON file from path: " + jsonFilePath);
 

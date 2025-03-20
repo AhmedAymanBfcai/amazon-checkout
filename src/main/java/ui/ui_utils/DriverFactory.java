@@ -5,6 +5,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+// Singleton-Like Behavior: Not a true singleton (no private constructor), but ensures one WebDriver at a time via the static driver check.
+// Factory Pattern: Acts as a factory by creating WebDriver instances based on input (browserName).
+// Static Methods: Utility-style, no need for instantiation since it manages a single, shared resource.
 public final class DriverFactory {
     private static WebDriver driver;
 

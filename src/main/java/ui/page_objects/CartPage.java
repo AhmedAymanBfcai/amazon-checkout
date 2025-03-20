@@ -1,14 +1,14 @@
 package ui.page_objects;
 
 import org.openqa.selenium.By;
-
 import static ui.ui_utils.Shared.*;
 
 public class CartPage {
 
     private final By cartButtonLocator = By.id("nav-cart");
-    private final By processToBuyButtonLocator = By.name("proceedToRetailCheckout");
+    public static By processToBuyButtonLocator = By.name("proceedToRetailCheckout");
     private final By totalPriceLocator = By.id("sc-subtotal-amount-buybox");
+    private final By addNewAddress = By.id("add-new-address-desktop-sasp-tango-link");
 
     private CartPage(){
 
@@ -22,26 +22,20 @@ public class CartPage {
         return this;
     }
 
-    public CartPage goToCheckout() {
-        return this;
-    }
-    
-//    public void goToSignInPage(){
-//        //clickOnElement(processToBuyButtonLocator);
-//    }
+    public double getExpectedTotalPrice() throws InterruptedException {
+        double total =  addAffordableProductsToCart();
+        clickOnElement(cartButtonLocator);
 
-    public double ExcpectedTotalPrice()  {
-        double total =  TestClickOnElement();
-        clickOnElement(cartButtonLocator) ;
         return total;
     }
 
-    public double getTotalPriceLocator(){
-        double totalPrice = Double.parseDouble(getElementText(totalPriceLocator).trim().replace(",","")
+    public double getActualTotalPrice(){
+        return Double.parseDouble(getElementText(totalPriceLocator).trim().replace(",","")
                 .replace("EGP ",""));
-        System.out.println(totalPrice);
-        return totalPrice;
     }
 
-
+    public void processToBuyButton() {
+        clickOnElement(processToBuyButtonLocator);
+        clickOnElement(addNewAddress);
+    }
 }
