@@ -62,6 +62,7 @@ public class ReqResApiTest {
         assertEquals(Base.response.statusCode(), 201, "Failed to create user!");
         String userId = Base.response.jsonPath().get("id");
         System.out.println("Created user ID: " + userId);
+        Base.response.prettyPrint();
 
         // Step 2: Attempt to retrieve the user
         RetrieveUser retrieveUser = getRetrieveUser(userId);

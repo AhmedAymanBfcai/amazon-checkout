@@ -56,7 +56,8 @@ public class CheckOutPage {
         try {
             System.out.println("Test1");
 
-            WebElement textLocatorElement = (WebElement) textLocator;
+             WebElement textLocatorElement = (WebElement) textLocator; // Wrong Casting
+            //  WebElement textLocatorElement = driver.findElement(textLocator);
             System.out.println("Test2");
 
             System.out.println("textLocatorElement: " + textLocatorElement.getText());

@@ -35,7 +35,7 @@ public final class Shared {
 
     public static double addAffordableProductsToCart() throws InterruptedException {
 
-        Thread.sleep(2000);
+        Thread.sleep(2000); // Bad Practice but for testing goals.
 
         List<WebElement> products = driver.findElements(By.xpath("//div[@data-component-type='s-search-result']"));
 
@@ -100,7 +100,7 @@ public final class Shared {
 
         try {
             Select select = new Select(dropdown);
-            select.selectByIndex(index);
+            select.selectByIndex(index); // May use selectByVisibleText() instead of selectByIndex().
         } catch (ElementNotInteractableException e) {
             ((JavascriptExecutor) driver).executeScript("arguments[0].selectedIndex=arguments[1];", dropdown, index);
         }

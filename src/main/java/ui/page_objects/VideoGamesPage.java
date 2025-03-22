@@ -12,7 +12,6 @@ public class VideoGamesPage {
     private final By priceLocator = By.xpath("//span[@class='a-price-whole']");
     private final By nextPageButtonLocator = By.linkText("Next");
 
-    //prevent instance
     private VideoGamesPage() {
     }
 

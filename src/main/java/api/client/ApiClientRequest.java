@@ -6,9 +6,6 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import java.util.Map;
 
-// Build Pattern: Simplifies creating complex requests with many optional parameters.
-
-// A class built to send HTTP requests (e.g., GET, POST, PUT, DELETE) to a specified API.
 public class ApiClientRequest {
     private final String baseUri;
     private final String endpoint;
@@ -19,7 +16,6 @@ public class ApiClientRequest {
     private final Object body;
     private final ContentType contentType;
 
-    // Holds the fully configured request (fields like baseUri, method, etc.) and provides the sendRequest() method to execute it.
     private ApiClientRequest(ApiRequestBuilder apiRequestBuilder){
         this.baseUri = apiRequestBuilder.baseUri;
         this.endpoint = apiRequestBuilder.endpoint;
@@ -31,14 +27,10 @@ public class ApiClientRequest {
         this.contentType = apiRequestBuilder.contentType;
     }
 
-    // Factory method to create an ApiRequestBuilder instance, starting the configuration process.
-    // It's static as you can call it on the class without needing an instance
     public static ApiRequestBuilder builder(String baseUri,String endpoint , HTTPMethod method){
         return new ApiRequestBuilder(baseUri, endpoint, method);
     }
 
-    // A method for request to be executed and stores the response in a static field Base.response.
-    // It takes the configured object and executes the HTTP request via RestAssured.
     public void sendRequest(){
         // Set the base URI
         RestAssured.baseURI = baseUri;
@@ -84,9 +76,6 @@ public class ApiClientRequest {
         }
     }
 
-    // A static inner class built to achieve builder pattern to construct request instances in a flexible way.
-    // Mandatory: baseUri, endpoint, method
-    // Optional: headers, queryParams, pathParams, body, contentType
     public static class ApiRequestBuilder {
 
         //Mandatory fields
@@ -107,9 +96,6 @@ public class ApiClientRequest {
         private Object body;
         private ContentType contentType;
 
-        // A builder method, It’s part of the builder pattern.
-        // Not a Constructor: Constructors initialize an object and don’t return this for chaining.
-        // Not a Traditional Getter/Setter: It sets a value, but returns this for chaining, unlike a typical setter.
         public ApiRequestBuilder headers(Map<String, String> headers) {
             this.headers = headers;
             return this; // To enable fluent chaining in the builder pattern.
@@ -135,7 +121,7 @@ public class ApiClientRequest {
             return this;
         }
 
-        // Creates and returns a new ApiClientRequest instance with the configured parameters.
+        // Static method to create an ApiRequestBuilder instance. Used to start the request-building process.
         public ApiClientRequest build(){
             return new ApiClientRequest(this);
         }

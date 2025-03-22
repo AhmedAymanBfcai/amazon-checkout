@@ -29,5 +29,4 @@ public class SignInPage {
         sendTextToElement(passwordFieldLocator, password);
         clickOnElement(signInFieldLocator);
     }
-
 }
